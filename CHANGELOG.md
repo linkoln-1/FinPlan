@@ -16,6 +16,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   have user-facing messages
 - Dashboard and Analytics offer an "Add rate" action directly from the
   missing-rate alert instead of pointing to Settings
+- Info popovers ("i" buttons) clipped their text; the popover now sizes
+  itself to the full explanation
 
 ## [1.0.0] - 2026-08-28
 

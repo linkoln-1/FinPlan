@@ -3163,6 +3163,278 @@
         }
       }
     },
+    "error.addRate": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add rate"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Задать курс"
+          }
+        }
+      }
+    },
+    "error.core.amountNotPositive": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The amount must be greater than zero."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Сумма должна быть больше нуля."
+          }
+        }
+      }
+    },
+    "error.core.calendar": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Could not compute calendar periods for this data."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Не удалось рассчитать календарные периоды для этих данных."
+          }
+        }
+      }
+    },
+    "error.core.currencyMismatch %@ %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Currency mismatch: expected %1$@, got %2$@."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Валюты не совпадают: ожидалась %1$@, получена %2$@."
+          }
+        }
+      }
+    },
+    "error.core.exchangeMissingCounterAmount": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Enter the amount received from the exchange."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Укажи полученную при обмене сумму."
+          }
+        }
+      }
+    },
+    "error.core.exchangeSameCurrency": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "An exchange needs two different currencies."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Для обмена нужны две разные валюты."
+          }
+        }
+      }
+    },
+    "error.core.invalidPlanInput": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The plan contains a value that cannot be calculated. Check the amounts, dates and percentages."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "В плане есть значение, которое нельзя рассчитать. Проверь суммы, даты и проценты."
+          }
+        }
+      }
+    },
+    "error.core.missingDestinationAccount": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choose the account to receive the money."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Выбери счёт зачисления."
+          }
+        }
+      }
+    },
+    "error.core.missingRate %@ %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No planning rate %1$@ → %2$@ yet. Add it in Settings → Planning, and everything will be converted to your base currency."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Не хватает планового курса %1$@ → %2$@. Добавь его в Настройки → Планирование — и всё пересчитается в базовую валюту."
+          }
+        }
+      }
+    },
+    "error.core.missingSourceAccount": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choose the account to pay from."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Выбери счёт списания."
+          }
+        }
+      }
+    },
+    "error.core.negativeSafeToSpendComponent": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "One of the Safe to Spend components is negative. Check reserves and upcoming payments."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Одна из составляющих «Можно потратить» отрицательная. Проверь резервы и предстоящие платежи."
+          }
+        }
+      }
+    },
+    "error.core.overflow": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The amount is too large to calculate."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Сумма слишком большая для расчёта."
+          }
+        }
+      }
+    },
+    "error.core.sameAccountTransfer": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A transfer needs two different accounts."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Для перевода нужны два разных счёта."
+          }
+        }
+      }
+    },
+    "error.core.splitCurrencyMismatch": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Split amounts must use the transaction currency."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Части должны быть в валюте операции."
+          }
+        }
+      }
+    },
+    "error.core.splitTotalMismatch": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The split amounts must add up to the transaction amount."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Сумма частей должна совпадать с суммой операции."
+          }
+        }
+      }
+    },
+    "error.core.unattributableFee": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The exchange fee currency matches neither side of the exchange."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Валюта комиссии не совпадает ни с одной из валют обмена."
+          }
+        }
+      }
+    },
     "error.notFound": {
       "extractionState": "manual",
       "localizations": {

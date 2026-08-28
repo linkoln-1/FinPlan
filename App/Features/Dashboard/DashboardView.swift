@@ -7,6 +7,7 @@ struct DashboardView: View {
     @Environment(AppRouter.self) private var router
     @State private var model = DashboardModel()
     @State private var isSettingsPresented = false
+    @State private var ratePrompt: MissingRatesPrompt?
 
     var body: some View {
         NavigationStack {
@@ -47,9 +48,20 @@ struct DashboardView: View {
             SettingsView()
         }
         .alert("dashboard.error.title", isPresented: isErrorPresented) {
+            if let pair = model.missingRate, pair.quote == store.baseCurrency {
+                Button("error.addRate") {
+                    ratePrompt = MissingRatesPrompt(currencies: [pair.base])
+                }
+            }
             Button("dashboard.error.dismiss", role: .cancel) {}
         } message: {
             Text(verbatim: model.errorMessage ?? store.lastError ?? "")
+        }
+        .sheet(item: $ratePrompt) { prompt in
+            SettingsMissingRatesSheet(currencies: prompt.currencies) {
+                ratePrompt = nil
+            }
+            .environment(store)
         }
     }
 
@@ -240,7 +252,7 @@ private func dashboardSeedPreviewData(into store: FinanceStore) {
         do {
             try store.addTransaction(record)
         } catch {
-            store.lastError = String(describing: error)
+            store.lastError = error.localizedDescription
         }
     }
 

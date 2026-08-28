@@ -43,15 +43,6 @@ struct SettingsView: View {
         NavigationStack {
             Form {
                 generalSection
-                .sheet(isPresented: Binding(
-                    get: { !missingRateCurrencies.isEmpty },
-                    set: { if !$0 { missingRateCurrencies = [] } }
-                )) {
-                    SettingsMissingRatesSheet(currencies: missingRateCurrencies) {
-                        missingRateCurrencies = []
-                    }
-                    .environment(store)
-                }
                 privacySection(store: $store)
                 SettingsNotificationsSection()
                 planningSection
@@ -73,6 +64,12 @@ struct SettingsView: View {
             Button("common.ok", role: .cancel) {}
         } message: {
             Text(localErrorMessage ?? "")
+        }
+        .sheet(item: $missingRatesPrompt) { prompt in
+            SettingsMissingRatesSheet(currencies: prompt.currencies) {
+                missingRatesPrompt = nil
+            }
+            .environment(store)
         }
         .onAppear {
             refreshBiometryAvailability()
@@ -112,7 +109,7 @@ struct SettingsView: View {
         }
     }
 
-    @State private var missingRateCurrencies: [Currency] = []
+    @State private var missingRatesPrompt: MissingRatesPrompt?
 
     private var baseCurrencyOptions: [String] {
         SettingsSupportedCurrencies.codes(including: [store.baseCurrency.code])
@@ -124,7 +121,9 @@ struct SettingsView: View {
             set: { newCode in
                 store.setBaseCurrency(Currency.known(code: newCode))
                 prefillBuffer()
-                promptForMissingRates()
+                Task { @MainActor in
+                    promptForMissingRates()
+                }
             }
         )
     }
@@ -142,7 +141,7 @@ struct SettingsView: View {
             .filter { store.planningRates.rate(from: $0, to: base) == nil }
             .sorted { $0.code < $1.code }
         if !missing.isEmpty {
-            missingRateCurrencies = missing
+            missingRatesPrompt = MissingRatesPrompt(currencies: missing)
         }
     }
 

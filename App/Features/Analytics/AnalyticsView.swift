@@ -6,6 +6,7 @@ struct AnalyticsView: View {
     @Environment(FinanceStore.self) private var store
     @State private var model = AnalyticsModel()
     @State private var activeError: String?
+    @State private var ratePrompt: MissingRatesPrompt?
 
     var body: some View {
         NavigationStack {
@@ -36,9 +37,20 @@ struct AnalyticsView: View {
             if let newValue { activeError = newValue }
         }
         .alert("analytics.error.title", isPresented: errorPresented) {
+            if let pair = model.missingRate, pair.quote == store.baseCurrency {
+                Button("error.addRate") {
+                    ratePrompt = MissingRatesPrompt(currencies: [pair.base])
+                }
+            }
             Button("common.ok", role: .cancel) {}
         } message: {
             Text(verbatim: activeError ?? "")
+        }
+        .sheet(item: $ratePrompt) { prompt in
+            SettingsMissingRatesSheet(currencies: prompt.currencies) {
+                ratePrompt = nil
+            }
+            .environment(store)
         }
     }
 

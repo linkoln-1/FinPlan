@@ -1,0 +1,91 @@
+name: FinPlan
+options:
+  bundleIdPrefix: com.alinashkhoev
+  deploymentTarget:
+    iOS: "18.0"
+  developmentLanguage: en
+  xcodeVersion: "26.0"
+  createIntermediateGroups: true
+settings:
+  base:
+    SWIFT_VERSION: "6.0"
+    SWIFT_STRICT_CONCURRENCY: complete
+    ENABLE_USER_SCRIPT_SANDBOXING: YES
+    CODE_SIGN_STYLE: Automatic
+    DEVELOPMENT_TEAM: XSXSZ2A7D9
+packages:
+  FinPlanCore:
+    path: Packages/FinPlanCore
+targets:
+  FinPlan:
+    type: application
+    platform: iOS
+    sources:
+      - path: App
+    dependencies:
+      - package: FinPlanCore
+      - target: FinPlanWidgets
+        embed: true
+    info:
+      path: App/Resources/Info.plist
+      properties:
+        UILaunchScreen: {}
+        CFBundleDisplayName: FinPlan
+        CFBundleShortVersionString: "1.0.0"
+        CFBundleVersion: "2"
+        NSFaceIDUsageDescription: "FinPlan uses Face ID to protect your financial data."
+        UISupportedInterfaceOrientations: [UIInterfaceOrientationPortrait]
+        CFBundleLocalizations: [en, ru]
+        ITSAppUsesNonExemptEncryption: false
+        CFBundleURLTypes:
+          - CFBundleURLName: com.alinashkhoev.finplan
+            CFBundleURLSchemes: [finplan]
+    settings:
+      base:
+        TARGETED_DEVICE_FAMILY: "1"
+        INFOPLIST_KEY_UIUserInterfaceStyle: ""
+        PRODUCT_BUNDLE_IDENTIFIER: com.alinashkhoev.finplan
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        MARKETING_VERSION: "1.0.0"
+        CODE_SIGN_ENTITLEMENTS: App/Resources/FinPlan.entitlements
+  FinPlanWidgets:
+    type: app-extension
+    platform: iOS
+    sources:
+      - path: Widgets
+    dependencies:
+      - package: FinPlanCore
+    info:
+      path: Widgets/Info.plist
+      properties:
+        CFBundleDisplayName: FinPlan Widgets
+        CFBundleShortVersionString: "1.0.0"
+        CFBundleVersion: "2"
+        NSExtension:
+          NSExtensionPointIdentifier: com.apple.widgetkit-extension
+    settings:
+      base:
+        TARGETED_DEVICE_FAMILY: "1"
+        PRODUCT_BUNDLE_IDENTIFIER: com.alinashkhoev.finplan.widgets
+        CODE_SIGN_ENTITLEMENTS: Widgets/FinPlanWidgets.entitlements
+  FinPlanTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - path: AppTests
+    dependencies:
+      - target: FinPlan
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: YES
+schemes:
+  FinPlan:
+    build:
+      targets:
+        FinPlan: all
+    run:
+      config: Debug
+    test:
+      config: Debug
+      targets:
+        - FinPlanTests

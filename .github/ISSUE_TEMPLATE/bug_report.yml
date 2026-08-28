@@ -1,0 +1,69 @@
+name: Bug report
+description: Something does not work as expected
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report a problem.
+
+        > **Never include financial data, passwords, tokens, private keys or other sensitive information.**
+        > Replace real amounts, account names and notes with synthetic values before pasting screenshots or logs.
+  - type: input
+    id: version
+    attributes:
+      label: App version or commit
+      description: Settings → About, or the git commit you built from
+      placeholder: "1.0.0 (2) / abc1234"
+    validations:
+      required: true
+  - type: input
+    id: ios
+    attributes:
+      label: iOS version
+      placeholder: "iOS 18.6"
+    validations:
+      required: true
+  - type: input
+    id: device
+    attributes:
+      label: Device or simulator
+      placeholder: "iPhone 16 Pro / iPhone 17 simulator"
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Open Goals
+        2. Create a goal in USD with target 1 000
+        3. …
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behaviour
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behaviour
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs, screenshots or crash report (optional)
+      description: Only if they contain no personal or financial data.
+      render: text
+  - type: checkboxes
+    id: confirm
+    attributes:
+      label: Confirmation
+      options:
+        - label: I have removed all personal and financial data from this report
+          required: true

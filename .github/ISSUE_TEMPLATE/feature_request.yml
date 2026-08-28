@@ -1,0 +1,45 @@
+name: Feature request
+description: Suggest an improvement or new capability
+title: "[Feature]: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        FinPlan is a planning tool first. Proposals that help answer
+        "where am I heading and what changes if I do X" fit best.
+
+        > **Never include financial data, passwords, tokens, private keys or other sensitive information.**
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What are you trying to do that is hard or impossible today?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      description: How would you like it to work? Sketches and examples with synthetic numbers are welcome.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Goals & projection
+        - Transactions & budgets
+        - Safe to Spend / What-If / Purchase impact
+        - Analytics & insights
+        - Widgets & App Intents
+        - Privacy & security
+        - Localization & accessibility
+        - Other
+    validations:
+      required: true

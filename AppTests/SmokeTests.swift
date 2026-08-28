@@ -388,3 +388,45 @@ struct PrivacyShieldTests {
         #expect(shield.isLocked)
     }
 }
+
+@Suite("Error messages")
+@MainActor
+struct ErrorMessageTests {
+    @Test("core errors describe themselves in user language")
+    func coreErrorsAreHumanized() {
+        let message = LedgerError.missingExchangeRate(base: "USD", quote: "RUB").localizedDescription
+        #expect(message.contains("USD"))
+        #expect(message.contains("RUB"))
+        #expect(!message.contains("FinPlanCore"))
+        #expect(!message.contains("error 0"))
+    }
+
+    @Test("missing rate pair is extracted from every planning error")
+    func missingRatePairExtraction() {
+        let expected = MissingRatePair(base: .usd, quote: .rub)
+        #expect(MissingRatePair(error: LedgerError.missingExchangeRate(base: "USD", quote: "RUB")) == expected)
+        #expect(MissingRatePair(error: ProjectionError.missingPlanningRate(base: "USD", quote: "RUB")) == expected)
+        #expect(MissingRatePair(error: ScenarioError.missingPlanningRate(base: "USD", quote: "RUB")) == expected)
+        #expect(MissingRatePair(error: PurchaseImpactError.missingPlanningRate(base: "USD", quote: "RUB")) == expected)
+        #expect(MissingRatePair(error: MoneyError.overflow) == nil)
+    }
+
+    @Test("dashboard exposes the missing pair after a base currency change")
+    func dashboardExposesMissingPair() {
+        let fixture = StoreFixture()
+        let store = fixture.store
+        let now = Date()
+        store.addAccount(Account(
+            name: "Card", currency: .usd, type: .checking,
+            openingBalance: Money(major: 1_000, currency: .usd), createdAt: now
+        ))
+        store.setBaseCurrency(.rub)
+
+        let model = DashboardModel()
+        model.recompute(store: store, now: now)
+
+        #expect(model.missingRate == MissingRatePair(base: .usd, quote: .rub))
+        #expect(model.errorMessage?.contains("USD") == true)
+        #expect(model.errorMessage?.contains("FinPlanCore") == false)
+    }
+}

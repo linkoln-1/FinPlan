@@ -97,6 +97,7 @@ final class DashboardModel {
     private(set) var chart: DashboardChartData?
     private(set) var topInsight: Insight?
     var errorMessage: String?
+    private(set) var missingRate: MissingRatePair?
 
     private static let projectionHorizonCycles = 120
     private static let forecastChartCycles = 24
@@ -109,16 +110,11 @@ final class DashboardModel {
 
     func recompute(store: FinanceStore, now: Date = Date(), calendar: Calendar = .current) {
         var firstFailure: String?
+        var firstMissingRate: MissingRatePair?
         func note(_ error: Error) {
             guard firstFailure == nil else { return }
-            if case LedgerError.missingExchangeRate(let from, let to) = error {
-                firstFailure = String(localized: "dashboard.error.missingRate \(from) \(to)")
-            } else if let projectionError = error as? ProjectionError,
-                      case .missingPlanningRate(let from, let to) = projectionError {
-                firstFailure = String(localized: "dashboard.error.missingRate \(from) \(to)")
-            } else {
-                firstFailure = String(describing: error)
-            }
+            firstFailure = error.localizedDescription
+            firstMissingRate = MissingRatePair(error: error)
         }
 
         let scheduler = RecurringScheduler(calendar: calendar)
@@ -182,6 +178,9 @@ final class DashboardModel {
 
         if errorMessage != firstFailure {
             errorMessage = firstFailure
+        }
+        if missingRate != firstMissingRate {
+            missingRate = firstMissingRate
         }
     }
 

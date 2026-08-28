@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- The "missing exchange rates" sheet shown after changing the base currency
+  dismissed itself immediately; it now stays open until the rates are entered
+- Calculation errors (for example a missing planning rate) were shown as raw
+  `FinPlanCore.LedgerError` descriptions in Analytics; all domain errors now
+  have user-facing messages
+- Dashboard and Analytics offer an "Add rate" action directly from the
+  missing-rate alert instead of pointing to Settings
+
 ## [1.0.0] - 2026-08-28
 
 First public release of the source code.

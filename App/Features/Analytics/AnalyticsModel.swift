@@ -105,6 +105,7 @@ final class AnalyticsModel {
     var period: AnalyticsPeriod = .sixMonths
     private(set) var snapshot: AnalyticsSnapshot?
     private(set) var computeError: String?
+    private(set) var missingRate: MissingRatePair?
 
     private struct CacheKey: Hashable {
         let period: AnalyticsPeriod
@@ -139,6 +140,7 @@ final class AnalyticsModel {
         if let hit = cache[key] {
             snapshot = hit
             computeError = nil
+            missingRate = nil
             return
         }
         do {
@@ -146,8 +148,10 @@ final class AnalyticsModel {
             cache[key] = built
             snapshot = built
             computeError = nil
+            missingRate = nil
         } catch {
             computeError = error.localizedDescription
+            missingRate = MissingRatePair(error: error)
         }
     }
 
